@@ -57,7 +57,7 @@ error.
 
 \ FABS should be superfluous in these:
 
-0e fabs       fconstant +0 
+0e fabs       fconstant +0
 +0 fnegate    fconstant -0
 
 [UNDEFINED] +inf [IF]
@@ -87,8 +87,8 @@ error.
     fdup -inf fdatum= or
     fdup +inf fdatum= or IF fdrop false EXIT THEN
     +inf f< 0= ;
-    
-  \ borrowed from ieee-fprox-test.fs  
+
+  \ borrowed from ieee-fprox-test.fs
   t{ +0 +0     fdatum= -> true }t
   t{ +0 -0     fdatum= -> false }t
   t{ -0 +0     fdatum= -> false }t
@@ -128,7 +128,7 @@ error.
   t{  1e  fnan? -> false }t
   t{ +nan fnan? -> true }t
   t{ -nan fnan? -> true }t
-  #errors @ 0= 
+  #errors @ 0=
 
 \ Note that the above is not airtight.  We really need to know
 \ that the IEEE special data are correct.

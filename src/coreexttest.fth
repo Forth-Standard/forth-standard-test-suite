@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.15 1 August 2025 Added two tests to VALUE
@@ -37,7 +37,7 @@
 \                <> U> 0<> 0> NIP TUCK ROLL PICK 2>R 2R@ 2R>
 \                HEX WITHIN UNUSED AGAIN MARKER
 \             Added tests for:
-\                .R U.R ERASE PAD REFILL SOURCE-ID 
+\                .R U.R ERASE PAD REFILL SOURCE-ID
 \             Removed ABORT from NeverExecuted to enable Win32
 \             to continue after failure of RESTORE-INPUT.
 \             Removed max-intx which is no longer used.
@@ -311,7 +311,7 @@ T{ MAX-INT MAX-INT MAX-INT WITHIN -> FALSE }T
 TESTING UNUSED  (contributed by James Bowman & Peter Knaggs)
 
 VARIABLE UNUSED0
-T{ UNUSED DROP -> }T                  
+T{ UNUSED DROP -> }T
 T{ ALIGN UNUSED UNUSED0 ! 0 , UNUSED CELL+ UNUSED0 @ = -> TRUE }T
 T{ UNUSED UNUSED0 ! 0 C, UNUSED CHAR+ UNUSED0 @ =
          -> TRUE }T  \ aligned -> unaligned
@@ -550,7 +550,7 @@ T{ S$ EVALUATE SI_INC @ -> 0 2345 15 }T
 \ -----------------------------------------------------------------------------
 TESTING .(
 
-CR CR .( Output from .() 
+CR CR .( Output from .()
 T{ CR .( You should see -9876: ) -9876 . -> }T
 T{ CR .( and again: ).( -9876)CR -> }T
 
@@ -589,7 +589,7 @@ T{ .R&U.R -> }T
 
 \ -----------------------------------------------------------------------------
 TESTING PAD ERASE
-\ Must handle different size characters i.e. 1 CHARS >= 1 
+\ Must handle different size characters i.e. 1 CHARS >= 1
 
 84 CONSTANT CHARS/PAD      \ Minimum size of PAD in chars
 CHARS/PAD CHARS CONSTANT AUS/PAD
@@ -598,7 +598,7 @@ CHARS/PAD CHARS CONSTANT AUS/PAD
    ?DO
       OVER I CHARS + C@ OVER <>
       IF 2DROP UNLOOP FALSE EXIT THEN
-   LOOP  
+   LOOP
    2DROP TRUE
 ;
 
@@ -636,7 +636,7 @@ T{ CHAR A PARSE A SWAP DROP -> 0 }T
 T{ CHAR Z PARSE
    SWAP DROP -> 0 }T
 T{ CHAR " PARSE 4567 "DUP ROT ROT EVALUATE -> 5 4567 }T
- 
+
 \ -----------------------------------------------------------------------------
 TESTING PARSE-NAME  (Forth 2012)
 \ Adapted from the PARSE-NAME RfD tests
@@ -648,7 +648,7 @@ T{ PARSE-NAME      abcde STR2 S= -> TRUE }T    \ Leading spaces
 T{ PARSE-NAME
   NIP -> 0 }T
 \ Empty parse area with spaces after PARSE-NAME
-T{ PARSE-NAME         
+T{ PARSE-NAME
   NIP -> 0 }T
 
 T{ : PARSE-NAME-TEST ( "name1" "name2" -- n )
@@ -659,7 +659,7 @@ T{ PARSE-NAME-TEST abcde abcdf -> FALSE }T
 T{ PARSE-NAME-TEST abcdf abcde -> FALSE }T
 T{ PARSE-NAME-TEST abcde abcde
    -> TRUE }T         \ Parse to end of line
-T{ PARSE-NAME-TEST abcde           abcde         
+T{ PARSE-NAME-TEST abcde           abcde
    -> TRUE }T         \ Leading and trailing spaces
 
 \ -----------------------------------------------------------------------------

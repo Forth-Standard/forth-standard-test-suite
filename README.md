@@ -42,7 +42,7 @@ The tests are not comprehensive, no claim is made about their being correct and 
 
 There is a flag, called VERBOSE, in file tester.fr that can be set to obtain more output from the test programs.
 
-When a test fails an error message is displayed and the tests carry on. To stop on the first failure uncomment the line marked *** in tester.fr 
+When a test fails an error message is displayed and the tests carry on. To stop on the first failure uncomment the line marked *** in tester.fr
 
 Typical output from the tests is given in the file doc/testoutput.txt. Some tests, particularly those displaying text cannot be automatically checked and require visual inspection.
 
@@ -51,7 +51,7 @@ Typical output from the tests is given in the file doc/testoutput.txt. Some test
   1. "WRONG NUMBER OF RESULTS:" when the stack depth of the test result is wrong
   2. "INCORRECT RESULT:" when the stack contents are incorrect
 
-These are followed by the offending line of source code. 
+These are followed by the offending line of source code.
 
 Other failures such as a standard word not being recognised will likely result in the test run terminating. This is the case if you are using
 GForth 0.7.3 to run the tests when a message such as:

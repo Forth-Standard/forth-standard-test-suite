@@ -5,7 +5,7 @@
 \ ttester is based on the original tester suite by Hayes:
 \ From: John Hayes S1I
 \ Subject: tester.fr
-\ Date: Mon, 27 Nov 95 13:10:09 PST  
+\ Date: Mon, 27 Nov 95 13:10:09 PST
 \ (C) 1995 JOHNS HOPKINS UNIVERSITY / APPLIED PHYSICS LABORATORY
 \ MAY BE DISTRIBUTED FREELY AS LONG AS THIS COPYRIGHT NOTICE REMAINS.
 \ VERSION 1.1
@@ -116,7 +116,7 @@ HAS-FLOATING [IF]
     FVARIABLE ABS-NEAR 0E    ABS-NEAR F!
 
     \ When EXACT? is TRUE, }F uses FEXACTLY=, otherwise FNEARLY=.
-    
+
     TRUE VALUE EXACT?
     : SET-EXACT  ( -- )   TRUE TO EXACT? ;
     : SET-NEAR   ( -- )  FALSE TO EXACT? ;
@@ -126,14 +126,14 @@ HAS-FLOATING [IF]
         Leave TRUE if the two floats are identical.
         )
         0E F~ ;
-    
+
     : FABS=  ( F: X Y -- S: FLAG )
         (
         Leave TRUE if the two floats are equal within the tolerance
         stored in ABS-NEAR.
         )
         ABS-NEAR F@ F~ ;
-    
+
     : FREL=  ( F: X Y -- S: FLAG )
         (
         Leave TRUE if the two floats are relatively equal based on the
@@ -143,13 +143,13 @@ HAS-FLOATING [IF]
 
     : F2DUP  FOVER FOVER ;
     : F2DROP FDROP FDROP ;
-    
+
     : FNEARLY=  ( F: X Y -- S: FLAG )
         (
-        Leave TRUE if the two floats are nearly equal.  This is a 
+        Leave TRUE if the two floats are nearly equal.  This is a
         refinement of Dirk Zoller's FEQ to also allow X = Y, including
         both zero, or to allow approximately equality when X and Y are too
-        small to satisfy the relative approximation mode in the F~ 
+        small to satisfy the relative approximation mode in the F~
         specification.
         )
         F2DUP FEXACTLY= IF F2DROP TRUE EXIT THEN
@@ -177,7 +177,7 @@ HAS-FLOATING-STACK [IF]
         FDEPTH START-FDEPTH @ > IF
             FDEPTH START-FDEPTH @ DO FDROP LOOP
         THEN ;
-    
+
     : F{ ( -- )
         FDEPTH START-FDEPTH ! 0 FCURSOR ! ;
 
@@ -207,15 +207,15 @@ HAS-FLOATING-STACK [IF]
             S" NUMBER OF FLOAT RESULTS BEFORE AND AFTER '->' DOES NOT MATCH: " ERROR
         THEN THEN ;
 
-    
+
     : FTESTER ( R -- )
         FDEPTH 0= ACTUAL-FDEPTH @ FCURSOR @ START-FDEPTH @ + 1+ < OR IF
-            S" NUMBER OF FLOAT RESULTS AFTER '->' BELOW ...}T SPECIFICATION: " ERROR 
+            S" NUMBER OF FLOAT RESULTS AFTER '->' BELOW ...}T SPECIFICATION: " ERROR
         ELSE ACTUAL-FRESULTS FCURSOR @ FLOATS + F@ FCONF= 0= IF
             S" INCORRECT FP RESULT: " ERROR
         THEN THEN
         1 FCURSOR +! ;
-        
+
 [ELSE]
     : EMPTY-FSTACK ;
     : F{ ;
@@ -237,7 +237,7 @@ HAS-FLOATING-STACK [IF]
         THEN THEN
         CELLS-PER-FP XCURSOR +! ;
     [THEN]
-[THEN]    
+[THEN]
 
 : EMPTY-STACK	\ ( ... -- ) empty stack; handles underflowed stack too.
     DEPTH START-DEPTH @ < IF
@@ -248,7 +248,7 @@ HAS-FLOATING-STACK [IF]
     THEN
     EMPTY-FSTACK ;
 
-: ERROR1	\ ( C-ADDR U -- ) display an error message 
+: ERROR1	\ ( C-ADDR U -- ) display an error message
 		\ followed by the line that had the error.
    TYPE SOURCE TYPE CR			\ display line corresponding to error
    EMPTY-STACK				\ throw away everything else

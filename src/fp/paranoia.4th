@@ -6,12 +6,12 @@
 \ Ported by Krishna Myneni
 \
 \ This version is based on the C program, paranoia.c at
-\ 
+\
 \    http://www.math.utah.edu/~beebe/software/ieee/
 \
-\ See copying guidelines in the original comments below. Please notify 
+\ See copying guidelines in the original comments below. Please notify
 \
-\    krishna.myneni@ccreweb.org 
+\    krishna.myneni@ccreweb.org
 \
 \ if you find any errors in this Forth translation.
 \
@@ -23,7 +23,7 @@
 \                km; system-specific initialization for VFX Forth
 \                    and bigforth.
 \   2009-05-25   km; incorporated changes present in the netlib
-\                    version of paranoia.c at 
+\                    version of paranoia.c at
 \		     http://www.netlib.org/paranoia/
 \                    The description at the original source page
 \                    indicates the netlib version is more up to date;
@@ -35,12 +35,12 @@
 \                    conditional defn. of FLOATS
 \ Notes (by km):
 \
-\   1) This Forth program should run on standard Forth-94 systems with 
+\   1) This Forth program should run on standard Forth-94 systems with
 \      floating point extensions. See system-specific initialization
 \      below these comments.
-\  
+\
 \   2) Either a separate FP stack system, or an integrated data/FP stack
-\      system may be used. Stack diagrams for words are specified for a 
+\      system may be used. Stack diagrams for words are specified for a
 \      separate FP system.
 \
 \   3) Signal handling has been commented out. The count of floating point
@@ -48,16 +48,16 @@
 \
 \   4) No attempt has been made to factor the code according to good Forth
 \      coding practice. This Forth port is a "raw" translation, intended to
-\      be directly comparable to the C code from which it was translated. 
-\      Since the program examines arithmetic precision, care was taken to 
-\      avoid modifying the arithmetic expressions, i.e. changing the order of 
-\      operations that commute mathematically, or modifying them for 
+\      be directly comparable to the C code from which it was translated.
+\      Since the program examines arithmetic precision, care was taken to
+\      avoid modifying the arithmetic expressions, i.e. changing the order of
+\      operations that commute mathematically, or modifying them for
 \      Forth-readable appearance. Even where it would have made sense to use
 \      floating point constants rather than variables, the temptation to
 \      do so was resisted in the fear that it could change the behavior of
 \      the program.
 \
-\   5) Other, possibly more up to date, C and Fortran versions of paranoia 
+\   5) Other, possibly more up to date, C and Fortran versions of paranoia
 \      may be found at the following site:
 \
 \	http://orion.math.iastate.edu/burkardt/c_src/paranoia/paranoia.html
@@ -66,7 +66,7 @@
 \      to the output for this Forth version, and found to be the same for
 \      two different Forth systems by David N. Williams.
 
-\ Add/uncomment your system-specific initialization below; examples for 
+\ Add/uncomment your system-specific initialization below; examples for
 \ kForth, PFE, VFX Forth, and bigforth
 
 \ For kForth
@@ -81,7 +81,7 @@ CR .( --------------------) CR
 \ For pfe
 \ s" FLOATING-EXT" environment? 0= [IF]
 \  cr .( ** Floating-point extension words not available **) cr ABORT
-\ [THEN] ( flag) drop 
+\ [THEN] ( flag) drop
 
 \ For VFX Forth
 (
@@ -275,32 +275,32 @@ lines
 
 DECIMAL
 
-s" [UNDEFINED]" pad c! pad char+ pad c@ move 
+s" [UNDEFINED]" pad c! pad char+ pad c@ move
 pad find nip 0=
 [IF]
 : [UNDEFINED]  ( "name" -- flag )
   bl word find nip 0= ; immediate
 [THEN]
 
-s" [DEFINED]" pad c! pad char+ pad c@ move 
+s" [DEFINED]" pad c! pad char+ pad c@ move
 pad find nip 0=
 [IF]
 : [DEFINED]  postpone [UNDEFINED] 0= ; immediate
 [THEN]
 
 
-[UNDEFINED] F~ 
+[UNDEFINED] F~
 [UNDEFINED] F<  or
 [UNDEFINED] F0= or
 [UNDEFINED] F** or
 [IF]
 	.( **  Requires  F**  and  F~  and  F<  and  F0=  ** ) cr ABORT
-[THEN] 
+[THEN]
 
 [UNDEFINED] FS. [IF]
-[DEFINED] F. [IF]  
-		: FS. F. ; 
-	[ELSE] 
+[DEFINED] F. [IF]
+		: FS. F. ;
+	[ELSE]
 		.( **  Requires  FS.  or  F.  for output  ** ) ABORT
 	[THEN]
 [THEN]
@@ -308,15 +308,15 @@ pad find nip 0=
 
 [UNDEFINED] F= [IF]
 	: F= ( F: r1 r2 -- ) ( -- flag )
-	    FDUP   F0= IF FABS THEN  FSWAP  
-	    FDUP   F0= IF FABS THEN 
+	    FDUP   F0= IF FABS THEN  FSWAP
+	    FDUP   F0= IF FABS THEN
 	    0E F~ ;
 [THEN]
 
 [UNDEFINED] F<> [IF] : F<> ( F: r1 r2 -- ) ( -- flag )   F= invert ;  [THEN]
-[UNDEFINED] F>  [IF] 
-	: F>  ( F: r1 r2 -- ) ( -- flag )   
-	    FOVER FOVER F< >R F= R> or invert ; 
+[UNDEFINED] F>  [IF]
+	: F>  ( F: r1 r2 -- ) ( -- flag )
+	    FOVER FOVER F< >R F= R> or invert ;
 [THEN]
 [UNDEFINED] F<= [IF] : F<= ( F: r1 r2 -- ) ( -- flag )   F> invert ;  [THEN]
 [UNDEFINED] F>= [IF] : F>= ( F: r1 r2 -- ) ( -- flag )   F< invert ;  [THEN]
@@ -349,11 +349,11 @@ FVARIABLE BMinusU2
 
 
 VARIABLE NoTrials  20 NoTrials !  \ Number of tests for commutativity.
-	  
+
 1  CONSTANT  Yes
 0  CONSTANT  No
 2  CONSTANT  Chopped
-1  CONSTANT  Rounded 
+1  CONSTANT  Rounded
 0  CONSTANT  Other
 3  CONSTANT  Flaw
 2  CONSTANT  Defect
@@ -431,7 +431,7 @@ FVARIABLE PseudoZero
 FVARIABLE Z1
 FVARIABLE Z2
 FVARIABLE Z9
-4 INTEGER ARRAY ErrCnt{ 
+4 INTEGER ARRAY ErrCnt{
 VARIABLE fpecount
 VARIABLE Milestone
 VARIABLE PageNo
@@ -458,14 +458,14 @@ VARIABLE SqRWrng
 VARIABLE UfNGrad
 
 \ Computed constants.
-\ U1  gap below 1.0, i.e, 1.0-U1 is next number below 1.0 
-\ U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0 
+\ U1  gap below 1.0, i.e, 1.0-U1 is next number below 1.0
+\ U2  gap above 1.0, i.e, 1.0+U2 is next number above 1.0
 
-\ floating point exception receiver 
+\ floating point exception receiver
 : Sigfpe ( i --  )
 	1 fpecount +!
 	cr ." * * * FLOATING-POINT ERROR * * *" cr
-	ABORT 
+	ABORT
 ;
 
 : BadCond ( n a u -- )
@@ -508,13 +508,13 @@ VARIABLE UfNGrad
 	." University of California" cr
 	." San Francisco, CA 94143-0704, USA" cr cr
 	." In doing so, please include the following information:" cr cr
-	." Precision: " 
-	1 FLOATS 
+	." Precision: "
+	1 FLOATS
 	CASE
 		4 OF ." single" ENDOF
 		8 OF ." double" ENDOF
 	       10 OF ." long double" ENDOF
-		1 FLOATS . ." bytes" 
+		1 FLOATS . ." bytes"
 	ENDCASE
 	cr
 	." Version: 10 February 1989; Forth" cr
@@ -548,9 +548,9 @@ VARIABLE UfNGrad
 ;
 
 : History ( -- )
-  \ History 
+  \ History
   \ Converted from Brian Wichmann's Pascal version to C by Thos Sumner,
-  \	with further massaging by David M. Gay. 
+  \	with further massaging by David M. Gay.
 
 	." The program attempts to discriminate among" cr cr
 	."   FLAWs, like lack of a sticky bit," cr
@@ -597,7 +597,7 @@ VARIABLE UfNGrad
 
 
 
-\ Random 
+\ Random
 \  Random computes
 \     X = (Random1 + Random9)^5
 \     Random1 = X - FLOOR(X) + 0.000005 * X;
@@ -606,9 +606,9 @@ VARIABLE UfNGrad
 
 
 : Random ( F: -- r )
-	Random1 F@ Random9 F@ F+  \ F: -- r 
+	Random1 F@ Random9 F@ F+  \ F: -- r
 	FDUP FDUP F*  FDUP F* F*  \ F: -- x
-	FDUP FDUP FLOOR F-        \ F: -- x  x-floor(x) 
+	FDUP FDUP FLOOR F-        \ F: -- x  x-floor(x)
 	FSWAP 0.000005E F* F+
 ;
 
@@ -628,7 +628,7 @@ FVARIABLE XB
 		Jvar F@ 1.0E F+ Jvar F!
 		s" " BadCond
 		." sqrt( " X F@ X F@ F* FS. ( %.17e) ."  - " X F@ FS. ( %.17e) ."  = "
-		OneUlp F@ * SqEr F@ F* FS. ( %.17e) cr 
+		OneUlp F@ * SqEr F@ F* FS. ( %.17e) cr
 		." instead of correct value 0." cr
 	ELSE drop
 	THEN
@@ -650,12 +650,12 @@ FVARIABLE XB
 
 
 : SR3750 ( -- )
-	X F@ Radix F@ F-  Z2 F@ Radix F@ F- F< 
+	X F@ Radix F@ F-  Z2 F@ Radix F@ F- F<
 	X F@ Z2 F@ F-  W F@ Z2 F@ F- F>  or invert IF
 		1 Ivar +!
 		X F@ D F@ F* FSQRT  X2 F!
 		X2 F@ Z2 F@ F-  Y F@ Z2 F@ F-  F-  Y2 F!
-		X8 F@  Y F@ Half F@ F-  F/  X2 F! 
+		X8 F@  Y F@ Half F@ F-  F/  X2 F!
 		X2 F@  Half F@ X2 F@ F* X2 F@ F*  F-  X2 F!
 		Y2 F@ Half F@ F+  Half F@ X2 F@ F-  F+  SqEr F!
 		SqEr F@ MinSqEr F@ F< IF  SqEr F@  MinSqEr F! THEN
@@ -671,7 +671,7 @@ FVARIABLE XB
 		N @ 0 <=  IF
 			Z F@ Zero F@ F=  Q F@ Zero F@ F<=  and IF
 				." WARNING:  computing" cr
-			ELSE 
+			ELSE
 				Defect s" computing" BadCond
 			THEN
 			."   " Z F@ FS. ( %.17e) ." ^" Q F@ FS. ( %.17e) cr
@@ -679,7 +679,7 @@ FVARIABLE XB
 			."     which compared unequal to correct " X F@ FS. ( %.17e) cr
 			."          they differ by " Y F@ X F@ F- FS. ( %.17e) cr
 		THEN
-		1 N +!  \ ... count discrepancies. 
+		1 N +!  \ ... count discrepancies.
 	THEN
 ;
 
@@ -690,16 +690,16 @@ FVARIABLE XB
 
 : SR3980 ( -- )
 	BEGIN
-		Ivar @ S>F Q F! 
+		Ivar @ S>F Q F!
 		Z F@ Q F@ POW  Y F!
 		IsYeqX
 		1 Ivar +!  Ivar @ M @ > IF  EXIT THEN
 		Z F@ X F@ F* X F!
 	X F@ W F@ F<  WHILE
-	REPEAT 
+	REPEAT
 ;
 
- 
+
 
 : PrintIfNPositive ( -- )
 	N @ 0> IF
@@ -708,7 +708,7 @@ FVARIABLE XB
 ;
 
 
- 
+
 
 : TstPtUf ( -- )
 	0 N !
@@ -742,26 +742,26 @@ FVARIABLE XB
 		V9 F@ Random2 F!
 		Z F@ One F@ F/ V9 F!
 
-		Z F@ Random1 F@ F=  
-		Z F@ Random2 F@ F= and 
+		Z F@ Random1 F@ F=
+		Z F@ Random2 F@ F= and
 		Z F@ V9 F@ F= and IF
 			N @ 0> IF Pause THEN
-			
+
 		ELSE
 			1 N !
 			Defect s" What prints as Z = " BadCond
 			( %.17e ) Z F@ FS. ." compares different from  "
 			Z F@ Random1 F@ F<> IF ." Z * 1 = " ( %.17e) Random1 F@ FS. THEN
-			Z F@ Random2 F@ F=  
+			Z F@ Random2 F@ F=
 			Random2 F@ Random1 F@ F= or invert  IF
 				." 1 * Z == " Random2 F@ F. cr
 			THEN
 			Z F@ V9 F@ F= invert IF ." Z / 1 = " ( %.17e) V9 F@ FS. cr THEN
-			Random2 F@ Random1 F@ F<> IF 
+			Random2 F@ Random1 F@ F<> IF
 				1 ErrCnt{ Defect } +!
 				Defect  s" Multiplication does not commute!" BadCond
-				." Comparison alleges that 1 * Z = " ( %.17e) 
-					Random2 F@ FS. cr 
+				." Comparison alleges that 1 * Z = " ( %.17e)
+					Random2 F@ FS. cr
 				." differs from Z * 1 = " ( %.17e) Random1 F@ FS. cr
 			THEN
 			Pause
@@ -774,25 +774,25 @@ FVARIABLE XB
 	\ =============================================
 	10 Milestone !
 	\ =============================================
-	Failure 
-	Three F@ Three F@ F* Nine F@ F= 
-	Nine F@ Three F@ F* TwentySeven F@ F= and 
+	Failure
+	Three F@ Three F@ F* Nine F@ F=
+	Nine F@ Three F@ F* TwentySeven F@ F= and
 	Four F@ Four F@ F+ Eight F@ F= and
-	Eight F@ Four F@ F* ThirtyTwo F@ F= and 
+	Eight F@ Four F@ F* ThirtyTwo F@ F= and
 	ThirtyTwo F@ TwentySeven F@ F- Four F@ F- One F@ F- Zero F@ F= and
-	s" 9 != 3*3, 27 != 9*3, 32 != 8*4, or 32-27-4-1 != 0" 
+	s" 9 != 3*3, 27 != 9*3, 32 != 8*4, or 32-27-4-1 != 0"
 	TstCond
 
-	Failure 
-	Four F@ One F@ F+ Five F@ F= 
+	Failure
+	Four F@ One F@ F+ Five F@ F=
 	Four F@ Five F@ F* Three F@ F* Four F@ F* TwoForty F@ F= and
 	TwoForty F@ Three F@ F/ Four F@ Four F@ F* Five F@ F* F- Zero F@ F= and
 	TwoForty F@ Four F@ F/  Five F@ Three F@ F* Four F@ F* F- Zero F@ F= and
 	TwoForty F@ Five F@ F/ Four F@ Three F@ F* Four F@ F* F- Zero F@ F= and
-	s" 5 != 4+1, 240/3 != 80, 240/4 != 60, or 240/5 != 48" 
+	s" 5 != 4+1, 240/3 != 80, 240/4 != 60, or 240/5 != 48"
 	TstCond
 
-	ErrCnt{ Failure } @ 0=  IF 
+	ErrCnt{ Failure } @ 0=  IF
 		." -1, 0, 1/2, 1, 2, 3, 4, 5, 9, 27, 32 & 240 are O.K." cr
 		cr
 	THEN
@@ -805,7 +805,7 @@ FVARIABLE XB
 		Z F@ One F@ F- Y F!
 	MinusOne F@  Y F@ FABS F+  Zero F@ F<  WHILE
 	REPEAT
- 
+
 	\ .. now W is just big enough that |((W+1)-W)-1| >= 1 ...
 	Zero F@ PrecisionF F!
 	One F@ Y F!
@@ -852,19 +852,19 @@ FVARIABLE XB
 		X F@ U2 F!
 		Half F@ U2 F@ F* ThirtyTwo F@ U2 F@ F* U2 F@ F* F+ Y F!
 		One F@ Y F@ F+ Y F!
-		Y F@ One F@ F- X F! 
+		Y F@ One F@ F- X F!
 	U2 F@ X F@ F<=  X F@ Zero F@ F<=  or invert WHILE
 	REPEAT
 
-	\ ... now U2 == 1 ulp of 1 + ... 
+	\ ... now U2 == 1 ulp of 1 + ...
 	Two F@ Three F@ F/ X F!
 	X F@ Half F@ F- F6 F!
-	F6 F@ F6 F@ F+ Third F! 
+	F6 F@ F6 F@ F+ Third F!
 	Third F@ Half F@ F- X F!
 	X F@ F6 F@ F+ FABS X F!
 	X F@ U1 F@ F< IF U1 F@ X F! THEN
 
-	\ ... now  X == (unknown no.) ulps of 1 -... 
+	\ ... now  X == (unknown no.) ulps of 1 -...
 	BEGIN
 		X F@ U1 F!
 		Half F@ U1 F@ F* ThirtyTwo F@ U1 F@ F* U1 F@ F* F+ Y F!
@@ -874,38 +874,38 @@ FVARIABLE XB
 		Half F@ Y F@ F+ X F!
 	U1 F@ X F@ F<=  X F@ Zero F@ F<= or invert WHILE
 	REPEAT
-	\ ... now U1 == 1 ulp of 1 - ... 
-	U1 F@ E1 F@ F= IF 
+	\ ... now U1 == 1 ulp of 1 - ...
+	U1 F@ E1 F@ F= IF
 		." confirms closest relative separation U1 ." cr
-	ELSE 
+	ELSE
 		." gets better closest relative separation U1 = " U1 F@ FS. ( %.7e) cr
 	THEN
 	One F@ U1 F@ F/ W F!
 	Half F@ U1 F@ F- Half F@ F+ F9 F!
 	0.01E U2 F@ U1 F@ F/ F+ FLOOR Radix F!
-	Radix F@ E0 F@ F=  IF 
+	Radix F@ E0 F@ F=  IF
 		." Radix confirmed." cr
-	ELSE 
+	ELSE
 		." MYSTERY: recalculated Radix = " ( %.7e) Radix F@ FS. cr
 	THEN
 
-	Defect 
-	Radix F@  Eight F@ Eight F@ F+ F<= 
+	Defect
+	Radix F@  Eight F@ Eight F@ F+ F<=
 	s" Radix is too big: roundoff problems"
 	TstCond
 
-	Flaw 
-	Radix F@ Two F@ F=  
+	Flaw
+	Radix F@ Two F@ F=
 	Radix F@ 10E F= or
-	Radix F@ One F@ F= or 
+	Radix F@ One F@ F= or
 	s" Radix is not as good as 2 or 10"
 	TstCond
 	\ =============================================
 	20 Milestone !
 	\ =============================================
-	
+
 	Failure
-	F9 F@ Half F@ F-  Half F@ F< 
+	F9 F@ Half F@ F-  Half F@ F<
 	s" (1-U1)-1/2 < 1/2 is FALSE, prog. fails?"
 	TstCond
 
@@ -915,7 +915,7 @@ FVARIABLE XB
 	Y F@ Half F@ F- Z F!
 
 	Failure
-	X F@ One F@ F<>  Z F@ Zero F@ F= or 
+	X F@ One F@ F<>  Z F@ Zero F@ F= or
 	s" Comparison is fuzzy,X=1 but X-1/2-1/2 != 0"
 	TstCond
 
@@ -924,12 +924,12 @@ FVARIABLE XB
 	\ =============================================
 	25 Milestone !
 	\ =============================================
-	\ ... BMinusU2 = nextafter(Radix, 0) 
+	\ ... BMinusU2 = nextafter(Radix, 0)
 	Radix F@ One F@ F- BMinusU2 F!
-	BMinusU2 F@ U2 F@ F- One F@ F+ BMinusU2 F! 
-	\ Purify Integers 
+	BMinusU2 F@ U2 F@ F- One F@ F+ BMinusU2 F!
+	\ Purify Integers
 	Radix F@ One F@ F<> IF
-		TwoForty F@ U1 F@ FLN F* Radix F@ FLN F/ FNEGATE X F! 
+		TwoForty F@ U1 F@ FLN F* Radix F@ FLN F/ FNEGATE X F!
 		Half F@  X F@ F+ FLOOR Y F!
 		X F@ Y F@ F- FABS Four F@ F* One F@ F<  IF Y F@ X F! THEN
 		X F@ TwoForty F@ F/ PrecisionF F!
@@ -942,7 +942,7 @@ FVARIABLE XB
 	THEN
 	Radix F@ One F@ F=  IF
 		." logarithmic encoding has precision characterized solely by U1." cr
-	ELSE 
+	ELSE
 		." The number of significant digits of the Radix is " PrecisionF F@ F.
 		cr
 	THEN
@@ -954,9 +954,9 @@ FVARIABLE XB
 	\ =============================================
 	30 Milestone !
 	\ =============================================
-	\ Test for extra-precise subepressions 
+	\ Test for extra-precise subepressions
 	\ X = FABS(((Four / Three - One) - One / Four) * Three - One / Four);
-	Four F@ Three F@ F/  One F@ F-  One F@ Four F@ F/ F- 
+	Four F@ Three F@ F/  One F@ F-  One F@ Four F@ F/ F-
 	Three F@ F*  One F@ Four F@ F/ F- FABS  X F!
 	BEGIN
 		X F@ Z2 F!
@@ -966,22 +966,22 @@ FVARIABLE XB
 	Z2 F@ X F@ F<=   X F@ Zero F@ F<= or invert	WHILE
 	REPEAT
 
-	\ X = Y = Z = FABS((Three / Four - Two / Three) * Three - One / Four); 
-	Three F@ Four F@ F/  Two F@ Three F@ F/ F- 
-	Three F@ F*  One F@ Four F@ F/ F- FABS 
+	\ X = Y = Z = FABS((Three / Four - Two / Three) * Three - One / Four);
+	Three F@ Four F@ F/  Two F@ Three F@ F/ F-
+	Three F@ F*  One F@ Four F@ F/ F- FABS
 	FDUP Z F! FDUP Y F! X F!
 	BEGIN
 		Z F@ Z1 F!
 		\ Z = (One / Two - ((One / Two - (Half * Z1 + ThirtyTwo * Z1 * Z1))
 		\ 	+ One / Two)) + One / Two;
 		Half F@ Z1 F@ F*  ThirtyTwo F@ Z1 F@ F* Z1 F@ F* F+
-		One F@ Two F@ F/ FSWAP F- 
+		One F@ Two F@ F/ FSWAP F-
 		One F@ Two F@ F/ F+
-		One F@ Two F@ F/ F-  
+		One F@ Two F@ F/ F-
 		One F@ Two F@ F/ F+  Z F!
 	Z1 F@ Z F@ F<=  Z F@ Zero F@ F<= or invert  WHILE
 	REPEAT
- 
+
 	BEGIN
 		BEGIN
 			Y F@ Y1 F!
@@ -990,15 +990,15 @@ FVARIABLE XB
 			Half F@ Y1 F@ F* ThirtyTwo F@ Y1 F@ F* Y1 F@ F* F+
 			Half F@ FSWAP F-  Half F@ F+
 			Half F@ FSWAP F-  Half F@ F+  Y F!
-		Y1 F@ Y F@ F<=   Y F@ Zero F@ F<= or invert WHILE 
-		REPEAT 
+		Y1 F@ Y F@ F<=   Y F@ Zero F@ F<= or invert WHILE
+		REPEAT
 		X F@ X1 F!
 		\ X = ((Half * X1 + ThirtyTwo * X1 * X1) - F9) + F9;
-		Half F@ X1 F@ F* ThirtyTwo F@ X1 F@ F* X1 F@ F* F+  
+		Half F@ X1 F@ F* ThirtyTwo F@ X1 F@ F* X1 F@ F* F+
 		F9 F@ F-  F9 F@ F+  X F!
 	X1 F@ X F@ F<=   X F@ Zero F@ F<= or invert WHILE
 	REPEAT
- 
+
 	X1 F@ Y1 F@ F<>   X1 F@ Z1 F@ F<> or IF
 		Serious s" Disagreements among the values X1, Y1, Z1" BadCond
 		." respectively  " X1 F@ FS. ( %.7e)  Y1 F@ FS. ( %.7e) Z1 F@ FS. ( %.7e) cr
@@ -1031,9 +1031,9 @@ FVARIABLE XB
 					X F@ FLN FNEGATE Q F!
 					." Some subexpressions appear to be calculated extra" cr
 					." precisely with about " Q F@ Radix F@ FLN F/ ( %g) F. ." extra B-digits, i.e." cr
-						
+
 					." roughly " Q F@ 10E FLN F/ ( %g) F. ." extra significant decimals." cr
-						
+
 				THEN
 				." That feature is not tested further by this program." cr
 			THEN
@@ -1048,7 +1048,7 @@ FVARIABLE XB
 	35 Milestone !
 	\ =============================================
 	Radix F@ Two F@ F>= IF
-		W F@  Radix F@ Radix F@ F* F/  X F! 
+		W F@  Radix F@ Radix F@ F* F/  X F!
 		X F@ One F@ F+  Y F!
 		Y F@ X F@ F-    Z F!
 		Z F@ U2 F@ F+   T F!
@@ -1057,7 +1057,7 @@ FVARIABLE XB
 		Failure  X F@ U2 F@ F=  s" Subtraction is not normalized X=Y,X+Z != Y+Z!"
 		TstCond
 
-		X F@ U2 F@ F=  IF 
+		X F@ U2 F@ F=  IF
 			." Subtraction appears to be normalized, as it should be."
 		THEN
 	THEN
@@ -1066,19 +1066,19 @@ FVARIABLE XB
 	F9 F@ One F@ F*    Y F!
 	One F@ F9 F@ F*    Z F!
 	F9 F@ Half F@ F-   X F!
-	Y F@ Half F@ F- X F@ F-    Y F! 
+	Y F@ Half F@ F- X F@ F-    Y F!
 	Z F@ Half F@ F- X F@ F-    Z F!
 	One F@ U2 F@ F+    X F!
 	X F@ Radix F@ F*   T F!
 	Radix F@ X F@ F*   R F!
 	T F@ Radix F@ F-   X F!
-	X F@ Radix F@  U2 F@ F* F- X F! 
-	R F@ Radix F@ F-   T F! 
+	X F@ Radix F@  U2 F@ F* F- X F!
+	R F@ Radix F@ F-   T F!
 	T F@ Radix F@  U2 F@ F* F- T F!
 	X F@ Radix F@ One F@ F- F* X F!
 	T F@ Radix F@ One F@ F- F* T F!
 
-	X F@ Zero F@ F=       Y F@ Zero F@ F=  and 
+	X F@ Zero F@ F=       Y F@ Zero F@ F=  and
 	Z F@ Zero F@ F=  and  T F@ Zero F@ F=  and  IF
 		Yes GMult !
 	ELSE
@@ -1093,7 +1093,7 @@ FVARIABLE XB
 	X F@ U2 F@ F-  X F@ X F@ F* F- FABS U1 F@ F-  Z F!
 
 	Failure  Y F@ Zero F@ F<=   Z F@ Zero F@ F<=  and
-	s" F* gets too many final digits wrong." 
+	s" F* gets too many final digits wrong."
 	TstCond
 
 	One F@ U2 F@ F- Y F!
@@ -1105,7 +1105,7 @@ FVARIABLE XB
 	X F@ Z F@ F-    X F!
 	Nine F@ TwentySeven F@ F/ T F!
 	Z F@ T F@ F-    Z F!
-	
+
 	Defect  X F@ Zero F@ F=   Y F@ Zero F@ F=  and  Z F@ Zero F@ F= and
 	s" Division lacks a Guard Digit, so error can exceed 1 ulp\nor  1/3  and  3/9  and  9/27 may disagree"
 	TstCond
@@ -1126,7 +1126,7 @@ FVARIABLE XB
 	THEN
 	One F@  One  F@ U2 F@ F+  F/  X F!
 	X   F@  Half F@ F- Half F@ F- Y F!
-	
+
 	Serious  Y F@ Zero F@ F<  s" Computed value of 1/1.000..1 >= 1"
 	TstCond
 
@@ -1180,12 +1180,12 @@ FVARIABLE XB
 		Radix F@ AInvrse F!
 		BEGIN
 			AInvrse F@ X F!
-			AInvrse F@ A1 F@ F/ AInvrse F! 
+			AInvrse F@ A1 F@ F/ AInvrse F!
 		AInvrse F@ FLOOR AInvrse F@ F<> invert WHILE
 		REPEAT
 		X F@ One F@ F=   A1 F@ Three F@ F>  or Done !
 		Done @ invert IF  Nine F@ One F@ F+  A1 F! THEN
-	Done @ invert WHILE 
+	Done @ invert WHILE
 	REPEAT
 	X F@ One F@ F=  IF Radix F@ A1 F! THEN
 	One F@ A1 F@ F/  AInvrse F!
@@ -1227,28 +1227,28 @@ FVARIABLE XB
 		Y2 F@ Y1 F@ F* Y1 F!
 		StickyBit F@  Y2 F@ F-  StickyBit F!
 		Y1 F@  Half F@ F- Y1 F!
-		X F@ Zero F@ F=      Y F@ Zero F@ F= and  Z F@ Zero F@ F= and  
+		X F@ Zero F@ F=      Y F@ Zero F@ F= and  Z F@ Zero F@ F= and
 		T F@ Zero F@ F= and  StickyBit F@ Zero F@ F= and  Y1 F@ Half F@ F= and IF
 			Rounded RMult !
 			." Multiplication appears to round correctly." cr
 
 		ELSE
-			X F@ U2 F@ F+ Zero F@ F=  
-			Y F@ Zero F@ F< and 
-			Z F@ U2 F@ F+ Zero F@ F= and 
-			T F@ Zero F@ F< and 
+			X F@ U2 F@ F+ Zero F@ F=
+			Y F@ Zero F@ F< and
+			Z F@ U2 F@ F+ Zero F@ F= and
+			T F@ Zero F@ F< and
 		        StickyBit F@ U2 F@ F+ Zero F@ F= and
 			Y1 F@ Half F@ F< and IF
 				Chopped RMult !
 				." Multiplication appears to chop." cr
 			ELSE
-			 	." F* is neither chopped nor correctly rounded." cr 
-				RMult @ Rounded =   GMult @ No =  and IF 
+			 	." F* is neither chopped nor correctly rounded." cr
+				RMult @ Rounded =   GMult @ No =  and IF
 					s" Multiplication" notify
 				THEN
 			THEN
 		THEN
-	ELSE 
+	ELSE
 		." F* is neither chopped nor correctly rounded." cr ( ABORT)
 	THEN
 	\ =============================================
@@ -1267,7 +1267,7 @@ FVARIABLE XB
 	Z F@  OneAndHalf F@ U2 F@ F+ F- Z F!
 	U2 F@ OneAndHalf F@ F-  T F@ F+ T F!
 
-	X F@ Zero F@ F>     Y F@ Zero F@ F> or  
+	X F@ Zero F@ F>     Y F@ Zero F@ F> or
 	Z F@ Zero F@ F> or  T F@ Zero F@ F> or  invert IF
 		OneAndHalf F@  Y2 F@ F/  X F!
 		OneAndHalf F@  U2 F@ F-  Y F!
@@ -1282,7 +1282,7 @@ FVARIABLE XB
 		Z F@   OneAndHalf F@ F-  Z F!
 		Y1 F@ Y2 F@ F- Y2 F!
 		F9 F@ U1 F@ F- F9 F@ F/  Y1 F!
-		X F@ Zero F@ F=      Y  F@ Zero F@ F= and  Z  F@ Zero F@ F= and 
+		X F@ Zero F@ F=      Y  F@ Zero F@ F= and  Z  F@ Zero F@ F= and
 		T F@ Zero F@ F= and  Y2 F@ Zero F@ F= and  Y2 F@ Zero F@ F= and
 		Y1 F@ Half F@ F- F9 F@ Half F@ F- F= and IF
 			Rounded RDiv !
@@ -1290,9 +1290,9 @@ FVARIABLE XB
 			GDiv @ No =  IF  s" Division" notify  THEN
 
 		ELSE
-			X  F@ Zero F@ F<      Y F@ Zero F@ F< and 
+			X  F@ Zero F@ F<      Y F@ Zero F@ F< and
 			Z  F@ Zero F@ F< and  T F@ Zero F@ F< and
-			Y2 F@ Zero F@ F< and  
+			Y2 F@ Zero F@ F< and
 			Y1 F@ Half F@ F- F9 F@ Half F@ F- F< and IF
 				Chopped RDiv !
 				." Division appears to chop." cr
@@ -1302,8 +1302,8 @@ FVARIABLE XB
 	RDiv @ Other = IF ." F/ is neither chopped nor correctly rounded." cr THEN
 	One F@ Radix F@ F/ BInvrse F!
 
-	Failure 
-	BInvrse F@ Radix F@ F* Half F@ F- Half F@ F= 
+	Failure
+	BInvrse F@ Radix F@ F* Half F@ F- Half F@ F=
 	s" Radix * ( 1 / Radix ) differs from 1"
 	TstCond
 ;
@@ -1312,7 +1312,7 @@ FVARIABLE XB
 : part4_loopA ( -- )
 	1 Ivar !
 	BEGIN
-		Ivar @ NoTrials @ <= WHILE 
+		Ivar @ NoTrials @ <= WHILE
 		X F@ One F@ F+ X F!
 		Defect SqXMinX
 		Jvar F@  Zero F@ F> IF EXIT THEN
@@ -1325,8 +1325,8 @@ FVARIABLE XB
 	\ =============================================
 	50 Milestone !
 	\ =============================================
-	Failure  
-	F9 F@ U1 F@ F+ Half F@ F- Half F@ F= 
+	Failure
+	F9 F@ U1 F@ F+ Half F@ F- Half F@ F=
 	BMinusU2 F@ U2 F@ F+ One F@ F- Radix F@ One F@ F- F= and
 	s" Incomplete carry-propagation in Addition"
 	TstCond
@@ -1354,17 +1354,17 @@ FVARIABLE XB
 			One F@  Y F@ F-  Y F!
 			F9  F@  X F@ F-  X F!
 			One F@  Y F@ F-  Y F!
-			X F@ Zero F@ F=   Y F@ Zero F@ F=  and IF 
+			X F@ Zero F@ F=   Y F@ Zero F@ F=  and IF
 				Rounded RAddSub !
 				." Addition/Subtraction appears to round correctly." cr
 				GAddSub @ No = IF  s" Add/Subtract" notify  THEN
-			ELSE 
+			ELSE
 				." Addition/Subtraction neither rounds nor chops." cr
 			THEN
-		ELSE 
+		ELSE
 			." Addition/Subtraction neither rounds nor chops." cr
 		THEN
-	ELSE 
+	ELSE
 		." Addition/Subtraction neither rounds nor chops." cr
 	THEN
 	One F@ S F!
@@ -1385,7 +1385,7 @@ FVARIABLE XB
 		." Checking for sticky bit." cr
 		Half F@  U1 F@ F+  U2 F@ F*  X F!
 		Half F@  U2 F@ F*  Y F!
-		One  F@  Y  F@ F+  Z F! 
+		One  F@  Y  F@ F+  Z F!
 		One  F@  X  F@ F+  T F!
 		Z F@ One F@ F- Zero F@ F<=   T F@ One F@ F- U2 F@ F>=  and IF
 			T F@ Y F@ F+  Z F!
@@ -1399,7 +1399,7 @@ FVARIABLE XB
 					Half F@ U1 F@ F- U1 F@ F*  Z F!
 					F9 F@ Z F@ F-  T F!
 					F9 F@ Y F@ F-  Q F!
-					T F@ F9 F@ F- Zero F@ F= 
+					T F@ F9 F@ F- Zero F@ F=
 					F9 F@ U1 F@ F- Q F@ F- Zero F@ F=  and IF
 						One F@ U2 F@ F+  OneAndHalf F@ F* Z F!
 						OneAndHalf F@ U2 F@ F+ Z F@ F- U2 F@ F+  T F!
@@ -1407,10 +1407,10 @@ FVARIABLE XB
 						One F@ Radix F@ U2 F@ F* F+ Y F!
 						X F@ Y F@ F* Z F!
 						T F@ Zero F@ F=
-						X F@ Radix F@ U2 F@ F* F+ 
+						X F@ Radix F@ U2 F@ F* F+
 						Z F@ F- Zero F@ F= and IF
 							Radix F@ Two F@ F<> IF
-								Two F@ U2 F@ F+ X F! 
+								Two F@ U2 F@ F+ X F!
 								X F@ Two F@ F/ Y F!
 								Y F@ One F@ F- Zero F@ F=  IF
 									S F@ StickyBit F!
@@ -1430,8 +1430,8 @@ FVARIABLE XB
 		." Sticky bit used incorrectly or not at all." cr
 	THEN
 
-	Flaw  
-	GMult @ No =  GDiv @ No = or  GAddSub @ No = or 
+	Flaw
+	GMult @ No =  GDiv @ No = or  GAddSub @ No = or
 	RMult @ Other = or  RDiv @ Other = or  RAddSub @ Other = or invert
 	s" lack(s) of guard digits or failure(s) to correctly round or chop (noted above) count as one flaw in the final tally below"
 	TstCond
@@ -1452,7 +1452,7 @@ FVARIABLE XB
 		Z F@ Z9 F@ F- Z9 F!
 		1 Ivar +!
 	Ivar @  NoTrials @ >   Z9 F@ Zero F@ F<>  or invert WHILE
-	REPEAT 
+	REPEAT
 	Ivar @ NoTrials @ = IF
 		One F@  Half F@ Three F@ F/ F+ Random1 F!
 		U2 F@ U1 F@ F+ One F@ F+ Random2 F!
@@ -1465,7 +1465,7 @@ FVARIABLE XB
 	THEN
 	Ivar @ NoTrials @ =   Z9 F@ Zero F@ F= or  invert IF
 		Defect s" X * Y == Y * X trial fails." BadCond
-	ELSE 
+	ELSE
 		."     No failures found in " NoTrials ? ." integer pairs." cr
 	THEN
 	\ =============================================
@@ -1473,10 +1473,10 @@ FVARIABLE XB
 	\ =============================================
 	cr ." Running test of square root(x)." cr
 
-	Failure 
+	Failure
 	Zero F@  Zero F@ FSQRT F=
 	Zero F@ FNEGATE  Zero F@ FNEGATE FSQRT F= and
-	One F@ One F@ FSQRT F= and 
+	One F@ One F@ FSQRT F= and
 	s" Square root of 0.0, -0.0 or 1.0 wrong"
 	TstCond
 
@@ -1493,7 +1493,7 @@ FVARIABLE XB
 	U1 F@ U1 F@ F* OneUlp F!
 	Serious SqXMinX
 	Jvar F@ Zero F@ F<> IF  Pause  THEN
-	." Testing if sqrt(X * X) == X for " NoTrials ? ." Integers X." cr 
+	." Testing if sqrt(X * X) == X for " NoTrials ? ." Integers X." cr
 	Zero F@ Jvar F!
 	Two F@ X F!
 	Radix F@ Y F!
@@ -1501,11 +1501,11 @@ FVARIABLE XB
 		BEGIN
 			Y F@ X F!
 			Radix F@ Y F@ F* Y F!
-			Y F@ X F@ F-  NoTrials @ S>F F>= invert WHILE 
+			Y F@ X F@ F-  NoTrials @ S>F F>= invert WHILE
 		REPEAT
 	THEN
 	X F@ U2 F@ F* OneUlp F!
-	part4_loopA 
+	part4_loopA
 
 	." Test for sqrt monotonicity."
 	1 NEGATE Ivar !
@@ -1526,7 +1526,7 @@ FVARIABLE XB
 			Q F@ Half F@ F+ FLOOR  Q F!
 			Ivar @ 0>  Radix F@ Q F@ Q F@ F* F=  or invert IF
 				True Monot !
-			ELSE 
+			ELSE
 				Ivar @ 0> IF
 					Ivar @ 1 > IF
 						True Monot !
@@ -1543,7 +1543,7 @@ FVARIABLE XB
 			THEN
 		THEN
 	REPEAT
-	Monot @ IF 
+	Monot @ IF
 		cr ." sqrt has passed a test for Monotonicity." cr
 	ELSE
 		Defect s" " BadCond
@@ -1569,7 +1569,7 @@ FVARIABLE XB
 	SqEr F@ MaxSqEr F@ F> IF  SqEr F@ MaxSqEr F!  THEN
 	Y F@ One F@ F+  U1 F@ Eight F@ F/  F+  SqEr F!
 	SqEr F@ MinSqEr F@ F< IF  SqEr F@ MinSqEr F!  THEN
-	U2 F@ OneUlp F!  
+	U2 F@ OneUlp F!
 	OneUlp F@ X F!
 	\ for( Indx = 1; Indx <= 3; ++Indx) {
 	4 1 DO
@@ -1593,12 +1593,12 @@ FVARIABLE XB
 	\ =============================================
 	False SqRWrng !
 	False Anomaly !
-	Other RSqrt !  \ ~dgh 
+	Other RSqrt !  \ ~dgh
 	Radix F@  One F@ F<> IF
 		." Testing whether sqrt is rounded or chopped." cr
 		\ D = FLOOR(Half + POW(Radix, One + PrecisionF - FLOOR(PrecisionF)));
 	Half F@  Radix F@  One F@ PrecisionF F@ F+ PrecisionF F@ FLOOR F- POW F+ FLOOR D F!
-	\ ... == Radix^(1 + fract) if (PrecisionF == Integer + fract. 
+	\ ... == Radix^(1 + fract) if (PrecisionF == Integer + fract.
 		D F@ Radix F@ F/ X F!
 		D F@ A1 F@ F/ Y F!
 		X F@ X F@ FLOOR F<>   Y F@ Y F@ FLOOR F<>  or IF
@@ -1606,7 +1606,7 @@ FVARIABLE XB
 		ELSE
 			Zero F@   X F!
 			X    F@  Z2 F!
-			One  F@   Y F! 
+			One  F@   Y F!
 			Y    F@  Y2 F!
 			Radix F@ One F@ F- Z1 F!
 			Four F@ D F@ F* FourD F!
@@ -1620,7 +1620,7 @@ FVARIABLE XB
 						Q F@ F+ FABS  X1 F!
 						Y1 F@ Q F!
 						X1 F@ Y1 F!
-					X1 F@ Zero F@ F<= invert WHILE 
+					X1 F@ Zero F@ F<= invert WHILE
 					REPEAT
 					Q F@ One F@ F<= IF
 						Y2 F@ Z2 F!
@@ -1648,7 +1648,7 @@ FVARIABLE XB
 					ELSE
 						Z1 F@  One F@ F- Z1 F!
 					THEN
-				Break @  Z1 F@ Zero F@ F<=  or invert WHILE 
+				Break @  Z1 F@ Zero F@ F<=  or invert WHILE
 				REPEAT
 				Z1 F@ Zero F@ F<=   Break @ invert and IF
 					True Anomaly !
@@ -1656,7 +1656,7 @@ FVARIABLE XB
 					Z1 F@  RadixD2 F@ F>  IF Z1 F@ Radix F@ F- Z1 F! THEN
 					BEGIN
 						NewD
-					U2 F@ D F@ F*  F9 F@ F>= invert WHILE 
+					U2 F@ D F@ F*  F9 F@ F>= invert WHILE
 					REPEAT
 					D F@ Radix F@ F* D F@ F-  W F@ D F@ F- F<> IF
 						True Anomaly !
@@ -1694,15 +1694,15 @@ FVARIABLE XB
 			." fails test whether sqrt rounds or chops." cr
 			True SqRWrng !
 		THEN
-	THEN 
+	THEN
 	Anomaly @ invert IF
 		MinSqEr F@ Zero F@ F<  MaxSqEr F@ Zero F@ F>  or  invert IF
 			Rounded RSqrt !
 			." Square root appears to be correctly rounded." cr
-		
+
 		ELSE
-			MaxSqEr F@ U2 F@ F+  U2 F@ Half F@ F- F> 
-			MinSqEr F@ Half F@ F>  or 
+			MaxSqEr F@ U2 F@ F+  U2 F@ Half F@ F- F>
+			MinSqEr F@ Half F@ F>  or
 			MinSqEr F@ Radix F@ F+ Half F@ F< or  IF
 				True SqRWrng !
 			ELSE
@@ -1713,8 +1713,8 @@ FVARIABLE XB
 	THEN
 	SqRWrng @ IF
 		." Square root is neither chopped nor correctly rounded." cr
-		." Observed errors run from " MinSqEr F@ Half F@ F- FS. ( %.7e)  
-		." to " Half F@ MaxSqEr F@ F+ FS. ( %.7e) ."  ulps." cr 
+		." Observed errors run from " MinSqEr F@ Half F@ F- FS. ( %.7e)
+		." to " Half F@ MaxSqEr F@ F+ FS. ( %.7e) ."  ulps." cr
 		Serious  MaxSqEr F@ MinSqEr F@ F-  Radix F@ Radix F@ F*  F<
 		s" sqrt gets too many last digits wrong"
 		TstCond
@@ -1725,7 +1725,7 @@ FVARIABLE XB
 	Pause
 	." Testing powers Z^i for small Integers Z and i." cr
 	0 N !
-	\ ... test powers of zero. 
+	\ ... test powers of zero.
 	0 Ivar !
 	Zero F@ FNEGATE Z F!
 	3 M !
@@ -1733,7 +1733,7 @@ FVARIABLE XB
 	BEGIN
 		One F@ X F!
 		SR3980
-		Ivar @ 10 <= IF 
+		Ivar @ 10 <= IF
 			1023 Ivar !
 			SR3980
 		THEN
@@ -1743,7 +1743,7 @@ FVARIABLE XB
 			MinusOne F@ Z F!
 			\ PrintIfNPositive
 			\ 0 N !
-			\ .. if(-1)^N is invalid, replace MinusOne by One. 
+			\ .. if(-1)^N is invalid, replace MinusOne by One.
 			-4 Ivar !
 		THEN
 	Break @ invert WHILE
@@ -1758,18 +1758,18 @@ FVARIABLE XB
 		Z F@ X F!
 		1 Ivar !
 		SR3980
-		Z F@ AInvrse F@ F= IF 
+		Z F@ AInvrse F@ F= IF
 			True Break !
-		ELSE 
+		ELSE
 			AInvrse F@ Z F!
 		THEN
-	Break @ invert WHILE 
+	Break @ invert WHILE
 	REPEAT
 	\ =============================================
 		100 Milestone !
 	\ =============================================
-	\  Powers of Radix have been tested, 
-	\         next try a few primes     
+	\  Powers of Radix have been tested,
+	\         next try a few primes
 	NoTrials @ M !
 	Three F@   Z F!
 	BEGIN
@@ -1778,9 +1778,9 @@ FVARIABLE XB
 		SR3980
 		BEGIN
 			Z F@ Two F@ F+ Z F!
-		Three F@  Z F@ Three F@ F/ FLOOR F*  Z F@ F=  WHILE 
+		Three F@  Z F@ Three F@ F/ FLOOR F*  Z F@ F=  WHILE
 		REPEAT
-	Z F@  Eight F@ Three F@ F* F<  WHILE 
+	Z F@  Eight F@ Three F@ F* F<  WHILE
 	REPEAT
 	N @ 0> IF
 		." Errors like this may invalidate financial calculations" cr
@@ -1790,7 +1790,7 @@ FVARIABLE XB
 	N1 @ N +!
 	N @ 0=  IF ." ... no discrepancies found." cr THEN
 	N @ 0> IF Pause ELSE cr THEN
-	
+
 ;
 \ end part5
 
@@ -1813,12 +1813,12 @@ FVARIABLE XB
 	THEN
 	One F@ Y F!
 	D F@ Z F!
-	\ ... D is power of 1/Radix < 1. 
+	\ ... D is power of 1/Radix < 1.
 	BEGIN
 		Y F@ C F!
 		Z F@ Y F!
 		Y F@ Y F@ F* Z F!
-	Y F@ Z F@ F>  Z F@ Z F@ F+ Z F@ F>  and WHILE 
+	Y F@ Z F@ F>  Z F@ Z F@ F+ Z F@ F>  and WHILE
 	REPEAT
 	C F@ Y F!
 	Y F@ D F@ F* Z F!
@@ -1826,20 +1826,20 @@ FVARIABLE XB
 		Y F@ C F!
 		Z F@ Y F!
 		Y F@ D F@ F* Z F!
-	Y F@  Z F@ F>  Z F@ Z F@ F+  Z F@ F>  and WHILE 
+	Y F@  Z F@ F>  Z F@ Z F@ F+  Z F@ F>  and WHILE
 	REPEAT
 	Radix F@ Two F@ F< IF  Two  ELSE  Radix THEN  F@ HInvrse F!
 	One F@ HInvrse F@ F/ H F!
-	\ ... 1/HInvrse == H == Min(1/Radix, 1/2) 
+	\ ... 1/HInvrse == H == Min(1/Radix, 1/2)
 	One F@ C F@ F/ CInvrse F!
 	C F@ E0 F!
 	E0 F@ H F@ F* Z F!
-	\ ...1/Radix^(BIG Integer) << 1 << CInvrse == 1/C 
+	\ ...1/Radix^(BIG Integer) << 1 << CInvrse == 1/C
 	BEGIN
 		E0 F@ Y F!
 		Z F@ E0 F!
 		E0 F@ H F@ F* Z F!
-	E0 F@ Z F@ F>  Z F@ Z F@ F+ Z F@ F>  and WHILE 
+	E0 F@ Z F@ F>  Z F@ Z F@ F+ Z F@ F>  and WHILE
 	REPEAT
 	E0 F@ UfThold F!
 	Zero F@ E1 F!
@@ -1873,20 +1873,20 @@ FVARIABLE XB
 			THEN
 			PseudoZero F@ H F@ F* PseudoZero F!
 		Underflow F@ PseudoZero F@ F>
-		PseudoZero F@ PseudoZero F@ F+  PseudoZero F@ F> and WHILE 
+		PseudoZero F@ PseudoZero F@ F+  PseudoZero F@ F> and WHILE
 		REPEAT
 	THEN
-	\ Comment line 4530 .. 4560 
+	\ Comment line 4530 .. 4560
 	PseudoZero F@ Zero F@ F<> IF
-		cr 
+		cr
 		PseudoZero F@ Z F!
-	\ ... Test PseudoZero for "phoney- zero" violates 
+	\ ... Test PseudoZero for "phoney- zero" violates
 	( ... PseudoZero < Underflow or PseudoZero < PseudoZero + PseudoZero
 		   ... )
 		PseudoZero F@ Zero F@ F<=  IF
 			Failure s" Positive expressions can underflow to an" BadCond
 			cr ." allegedly negative value" cr
-			." PseudoZero that prints out as: " PseudoZero F@ F. ( %g) cr 
+			." PseudoZero that prints out as: " PseudoZero F@ F. ( %g) cr
 			PseudoZero F@ FNEGATE X F!
 			X F@ Zero F@ F<=  IF
 				." But -PseudoZero, which should be" cr
@@ -1894,7 +1894,7 @@ FVARIABLE XB
 			THEN
 		ELSE
 			Flaw s" Underflow can stick at an allegedly positive" BadCond
-			cr ." value PseudoZero that prints out as " PseudoZero F@ F. ( %g) cr 
+			cr ." value PseudoZero that prints out as " PseudoZero F@ F. ( %g) cr
 		THEN
 		TstPtUf
 	THEN
@@ -1911,7 +1911,7 @@ FVARIABLE XB
 			." Products underflow at a higher"
 			." threshold than differences." cr
 			PseudoZero F@ Zero F@ F=  IF  E1 F@ E0 F!  THEN
-		
+
 		ELSE
 			." Difference underflows at a higher"
 			." threshold than products." cr
@@ -1930,10 +1930,10 @@ FVARIABLE XB
 		1 OF
 		Underflow F@  UfThold F!
 		CInvrse F@ Q F@ F*  CInvrse F@ Y F@ F* S F@ F*  F<> IF
-			Y F@ UfThold F! 
+			Y F@ UfThold F!
 			Failure s" Either accuracy deteriorates as numbers" BadCond
-			cr ." approach a threshold = " UfThold F@ FS. ( %.17e) 
-			cr ." coming down from " C F@ FS. ( %.17e) 
+			cr ." approach a threshold = " UfThold F@ FS. ( %.17e)
+			cr ." coming down from " C F@ FS. ( %.17e)
 			cr ." or else multiplication gets too many last digits wrong." cr
 		THEN
 		Pause
@@ -1943,7 +1943,7 @@ FVARIABLE XB
 		Failure s" Underflow confuses Comparison, which alleges that" BadCond
 		cr ." Q == Y while denying that |Q - Y| == 0; these values"
 		cr ." print out as Q = " Q F@ FS. ( %.17e) ." , Y = " Y2 F@ FS. ( %.17e)
-		cr ." |Q - Y| = " Q F@ Y2 F@ F- FABS FS. ( %.17e) cr 
+		cr ." |Q - Y| = " Q F@ Y2 F@ F- FABS FS. ( %.17e) cr
 		Q F@ UfThold F!
 		ENDOF
 
@@ -1969,11 +1969,11 @@ FVARIABLE XB
 	UfNGrad @ IF
 		cr
 		\ Sigfpe sigsave !
-		\ setjmp(ovfl_buf) 
+		\ setjmp(ovfl_buf)
 		0 IF
 			." Underflow / UfThold failed!" cr
 			R = H F@ H F@ F+  R F!
-		ELSE 
+		ELSE
 			Underflow F@ UfThold F@ F/ FSQRT  R F!
 		THEN
 		0 sigsave !
@@ -1982,24 +1982,24 @@ FVARIABLE XB
 			Z F@  One F@  R F@ H F@ F*  One F@ H F@ F+ F* F+  F*  X F!
 		ELSE
 			UfThold F@ Z F!
-			Z F@  One F@  H F@ H F@ F*  One F@ H F@ F+ F* F+ F*  X F! 
+			Z F@  One F@  H F@ H F@ F*  One F@ H F@ F+ F* F+ F*  X F!
 		THEN
 		X F@ Z F@ F=   X F@ Z F@ F- Zero F@ F<>  or invert IF
 			Flaw  s" "  BadCond
-			." X = " X F@ FS. ( %.17e) cr 
+			." X = " X F@ FS. ( %.17e) cr
 			."     is not equal to Z = " Z F@ FS. ( %.17e) cr
 			X F@ Z F@ F- Z9 F!
 			." yet X - Z yields " Z9 F@ FS. ( %.17e) cr
-			."    Should this NOT signal Underflow, this is a SERIOUS DEFECT" 
+			."    Should this NOT signal Underflow, this is a SERIOUS DEFECT"
 			."    that causes confusion when innocent statements like" cr
 			."    if (X == Z)  ...  else ... (f(X) - f(Z)) / (X - Z) ..." cr
 			." encounter Division by Zero although actually" cr
 			\ Sigfpe sigsave !
-			\ setjmp(ovfl_buf) 
+			\ setjmp(ovfl_buf)
 			0 IF
 				." X / Z fails!" cr
-			ELSE 
-				." X / Z = 1 + " 
+			ELSE
+				." X / Z = 1 + "
 				X F@ Z F@ F/ Half F@ F- Half F@ F- F. ( %g) cr
 			THEN
 			0 sigsave !
@@ -2076,7 +2076,7 @@ FVARIABLE XB
 	130 Milestone !
 	\ =============================================
 	\ Y = - FLOOR(Half - TwoForty * LOG(UfThold) / LOG(HInvrse)) / TwoForty;
-	Half F@ TwoForty F@ UfThold F@ FLN F* HInvrse F@ FLN F/ F- FLOOR 
+	Half F@ TwoForty F@ UfThold F@ FLN F* HInvrse F@ FLN F/ F- FLOOR
 	TwoForty F@ F/ FNEGATE Y F!
 	Y F@ Y F@ F+ Y2 F!
 	." Since underflow occurs below the threshold" cr
@@ -2085,10 +2085,10 @@ FVARIABLE XB
 	."      "  HInvrse F@ FS. ( %.17e) ." ^" Y2 F@ FS. ( %.17e) cr
 	HInvrse F@  Y2 F@  POW  V9 F!
 	." actually calculating yields: " V9 F@ FS. ( %.17e) cr
-	V9 F@ Zero F@ F>= 
+	V9 F@ Zero F@ F>=
 	V9 F@  Radix F@ Radix F@ F+ E9 F@ F+ UfThold F@ F* F<=  and  invert IF
 		Serious s" this is not between 0 and underflow" BadCond
-		."   threshold = " UfThold F@ FS. ( %.17e) cr 
+		."   threshold = " UfThold F@ FS. ( %.17e) cr
 	ELSE
 		V9 F@   UfThold F@  One F@ E9 F@ F+ F*  F>  invert IF
 			." This computed value is O.K." cr
@@ -2101,7 +2101,7 @@ FVARIABLE XB
 	140 Milestone !
 	\ =============================================
 	cr
-	\ ...calculate Exp2 == exp(2) == 7.389056099... 
+	\ ...calculate Exp2 == exp(2) == 7.389056099...
 	Zero F@ X F!
 	2 Ivar !
 	Two F@ Three F@ F*  Y F!
@@ -2117,7 +2117,7 @@ FVARIABLE XB
 	X F@ Z F@ F>  WHILE
 	REPEAT
 	\ Z = (OneAndHalf + One / Eight) + X / (OneAndHalf * ThirtyTwo);
-	OneAndHalf F@  One F@ Eight F@ F/ F+  
+	OneAndHalf F@  One F@ Eight F@ F/ F+
 	X F@  OneAndHalf F@ ThirtyTwo F@ F* F/ F+  Z F!
 	Z F@ Z F@ F*  X F!
 	X F@ X F@ F*  Exp2 F!
@@ -2146,11 +2146,11 @@ FVARIABLE XB
 		IsYeqX
 		Z F@  One F@ F<  IF
 			True Break !
-		ELSE 
+		ELSE
 			AInvrse F@ Z F!
 		THEN
 	Break @ invert  WHILE
-	REPEAT 
+	REPEAT
 	PrintIfNPositive
 	N @ 0=  IF  ." ... no discrepancies found." cr  THEN
 	cr
@@ -2203,7 +2203,7 @@ FVARIABLE XB
 	." Overflow threshold is V  = " V F@ FS. ( %.17e) cr
 	Ivar @  IF
 		 ." Overflow saturates at V0 = " V0 F@ FS. ( %.17e) cr
-	ELSE 
+	ELSE
 		." There is no saturation value because the system traps on overflow." cr
 	THEN
 	V F@ One F@ F*  V9 F!
@@ -2232,11 +2232,11 @@ FVARIABLE XB
 			3  OF  PseudoZero ENDOF
 		ENDCASE
 		F@  Z F!
-		Z F@ Zero F@ F<> IF 
+		Z F@ Zero F@ F<> IF
 			Z F@ FSQRT V9 F!
 			V9 F@ V9 F@ F*  Y F!
 			Y F@  One F@ Radix F@ E9 F@ F* F- F/  Z F@ F<
-			Y F@  One F@  Radix F@ E9 F@ F* F+ Z F@ F* F>  or IF  \ dgh: + E9 --> * E9 
+			Y F@  One F@  Radix F@ E9 F@ F* F+ Z F@ F* F>  or IF  \ dgh: + E9 --> * E9
 				V9 F@ U1 F@ F> IF Serious ELSE  Defect THEN s" " BadCond
 
 				." Comparison alleges that what prints as Z = "
@@ -2263,7 +2263,7 @@ FVARIABLE XB
 		THEN
 	LOOP
 	\ =============================================
-	
+
 ;
 \ end part7
 
@@ -2278,7 +2278,7 @@ FVARIABLE XB
 	X F@ Y F@ F* One F@ F<   X F@ Y F@ F>  or IF
 		X F@ Y F@ F*  U1 F@ F<  X F@ > Y F@ U1 F@ F/ F>  or IF
 			Defect  s" Badly"
-		ELSE 
+		ELSE
 			Flaw s" "
 		THEN
 		BadCond
@@ -2302,8 +2302,8 @@ FVARIABLE XB
 		\	printf("  X / X  traps when X = %g\n", X);
 		\ else {
 			Y F@ X F@ F/  Half F@ F- Half F@ F- V9 F!
-			V9 F@ Zero F@ F<> IF 
-				V9 F@ U1 F@ FNEGATE F=   I 5 <  and 
+			V9 F@ Zero F@ F<> IF
+				V9 F@ U1 F@ FNEGATE F=   I 5 <  and
 				IF  Flaw  ELSE Serious  THEN  s" " BadCond
 				."  X / X differs from 1 when X = " X F@ FS. ( %.17e) cr
 				."  instead, X / X - 1/2 - 1/2 = " V9 F@ FS. ( %.17e) cr
@@ -2347,7 +2347,7 @@ FVARIABLE XB
 		\ if (!setjmp(ovfl_buf)) printf("  %.7e .\n", Zero / MyZero);
 		Zero F@ MyZero F@ F/ FS. cr
 		0 sigsave !
-	ELSE 
+	ELSE
 		." O.K."  cr
 	THEN
 
@@ -2358,18 +2358,18 @@ FVARIABLE XB
 	cr
 	." FAILUREs  encountered = " ErrCnt{ Failure } ? cr
 	." SERIOUS DEFECTs  discovered = " ErrCnt{ Serious } ? cr
-	." DEFECTs  discovered = " ErrCnt{ Defect } ? cr 
+	." DEFECTs  discovered = " ErrCnt{ Defect } ? cr
 	." FLAWs  discovered = " ErrCnt{ Flaw } ? cr
 
 	cr
-	ErrCnt{ Failure } @   ErrCnt{ Serious } @ + 
+	ErrCnt{ Failure } @   ErrCnt{ Serious } @ +
 	ErrCnt{ Defect }  @ + ErrCnt{ Flaw } @  + 0> IF
-		ErrCnt{ Failure } @  ErrCnt{ Serious } @  + 
+		ErrCnt{ Failure } @  ErrCnt{ Serious } @  +
 		ErrCnt{ Defect } @ + 0=  ErrCnt{ Flaw } @ 0> and IF
 			." The arithmetic diagnosed seems "
 			." Satisfactory though flawed." cr
 		THEN
-		ErrCnt{ Failure } @ ErrCnt{ Serious } @ + 0= 
+		ErrCnt{ Failure } @ ErrCnt{ Serious } @ + 0=
 		ErrCnt{ Defect } @ 0>  and IF
 			." The arithmetic diagnosed may be Acceptable" cr
 			." despite inconvenient Defects." cr
@@ -2389,18 +2389,18 @@ FVARIABLE XB
 			." The arithmetic diagnosed seems Satisfactory." cr
 		ELSE
 			StickyBit F@ One F@ F>=
-			Radix F@ Two F@ F-  Radix F@ Nine F@ F- One F@ F- F* Zero F@ F=  
+			Radix F@ Two F@ F-  Radix F@ Nine F@ F- One F@ F- F* Zero F@ F=
 			and  IF
 			." Rounding appears to conform to the proposed IEEE standard P"
-			Radix F@ Two F@ F= 
+			Radix F@ Two F@ F=
 			PrecisionF F@  Four F@ Three F@ F* Two F@ F* F-
-			PrecisionF F@ TwentySeven F@ F- TwentySeven F@ F- One F@ F+ 
+			PrecisionF F@ TwentySeven F@ F- TwentySeven F@ F- One F@ F+
 			F*  Zero F@ F=  and  IF
 					." 754"
-				ELSE 
+				ELSE
 					." 854"
 				THEN
-				IEEE @ IF 
+				IEEE @ IF
 					cr
 				ELSE
 					cr ." except for possibly Double Rounding"
@@ -2411,7 +2411,7 @@ FVARIABLE XB
 		THEN
 	THEN
 	fpecount @ IF
-		cr ." A total of " fpecount ? 
+		cr ." A total of " fpecount ?
 		."  floating point exceptions were registered." cr
 	THEN
 	." END OF TEST." cr
@@ -2461,19 +2461,19 @@ FVARIABLE XB
 	Pause
 	History
 	Pause
-	
+
 	\ =============================================
 	7 Milestone !
 	\ =============================================
 	." Program is now RUNNING tests on small integers:" cr
 
-	Failure 
-	Zero F@  Zero F@ F+ Zero F@  F=  
+	Failure
+	Zero F@  Zero F@ F+ Zero F@  F=
 	One  F@  One  F@ F- Zero F@  F=  and
 	One  F@  Zero F@             F>  and
-	One  F@  One  F@ F+ Two F@   F=  and 
+	One  F@  One  F@ F+ Two F@   F=  and
 	s" 0+0 != 0, 1-1 != 0, 1 <= 0, or 1+1 != 2"
-	TstCond 
+	TstCond
 
 	Zero F@ FNEGATE  Z F!
 	Z F@ 0E F<> IF
@@ -2483,14 +2483,14 @@ FVARIABLE XB
 		1E Radix F!
 		TstPtUf
 	THEN
- 
+
 	Failure
 	Two F@ One F@ F+ Three F@  F=
 	Three F@ One F@ F+ Four F@ F=  and
 	Four F@ Two F@ Two F@ FNEGATE F* F+ Zero F@ F=  and
 	Four F@ Three F@ F- One F@ F- Zero F@ F= and
 	s" 3 != 2+1, 4 != 3+1, 4+2*(-2) != 0, or 4-3-1 != 0"
-	TstCond 
+	TstCond
 
 	Failure
 	0E One F@ F- MinusOne F@ F=
@@ -2499,7 +2499,7 @@ FVARIABLE XB
 	MinusOne F@ One F@ FABS F+ Zero F@ F= and
 	MinusOne F@ MinusOne F@ MinusOne F@ F* F+ Zero F@ F= and
 	s" -1+1 != 0, (-1)+abs(1) != 0, or -1+(-1)*(-1) != 0"
-	TstCond 
+	TstCond
 
 	Failure
 	Half F@ MinusOne F@ F+ Half F@ F+ Zero F@ F=

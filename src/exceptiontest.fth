@@ -8,11 +8,11 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.13 13 Nov 2015 C6 rewritten to avoid use of CASE etc and hence
-\              dependence on the Core extension word set.     
+\              dependence on the Core extension word set.
 \         0.4 1 April 2012  Tests placed in the public domain.
 \         0.3 6 March 2009 { and } replaced with T{ and }T
 \         0.2 20 April 2007 ANS Forth words changed to upper case
