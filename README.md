@@ -1,3 +1,10 @@
+# forth-standard-test-suite
+__This project has been started and mainted by Gerry Jackson,
+the committee has been asked by him to take over maintenance.__
+
+We would very much like to think for the excellent work he put into this over many years.  
+Original ReadMe below:
+
 # forth2012-test-suite
 Test programs for Forth 2012 and ANS Forth
 
