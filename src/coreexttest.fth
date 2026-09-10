@@ -617,7 +617,7 @@ T{ PAD 52 CHARS + CHARS/PAD 52 - MAXCHAR CHECKPAD -> TRUE }T
 \ Minimum size of buffers for these are 33 chars and (2*n)+2 chars respectively
 \ where n is number of bits per cell
 
-PAD CHARS/PAD ERASE
+PAD AUS/PAD ERASE
 2 BASE !
 MAX-UINT MAX-UINT <# #S CHAR 1 DUP HOLD HOLD #> 2DROP
 DECIMAL
