@@ -90,7 +90,7 @@ The next test should display:
 One line...
 another line
 One line...
-anotherLine
+another line
 
 End of Core Extension word tests
 *********Screen 29 not modified

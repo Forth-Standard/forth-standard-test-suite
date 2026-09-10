@@ -755,7 +755,7 @@ T{ SSQ3 DROP 19 CHARS + C@ ->  92 }T    \ \\   \    Back Slash
 CR .( The next test should display:)
 CR .( One line...)
 CR .( another line)
-T{ : SSQ4 S\" \nOne line...\nanotherLine\n" TYPE ; SSQ4 -> }T
+T{ : SSQ4 S\" \nOne line...\nanother line\n" TYPE ; SSQ4 -> }T
 
 \ Test bare escapable characters appear as themselves
 T{ : SSQ5 S\" abeflmnqrtvxz" S" abeflmnqrtvxz" S= ; SSQ5 -> TRUE }T
