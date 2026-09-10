@@ -1,4 +1,4 @@
-\ to-float-test.fs  
+\ to-float-test.fs
 \
 \ Test Forth-94 compliance for >FLOAT
 \
@@ -18,7 +18,7 @@
 CR .( Running to-float-test.4th)
 CR .( -------------------------) CR
 
-0 [IF]  \ original code 
+0 [IF]  \ original code
 
 : CHK ( addr len flag )
   >R CR [CHAR] " EMIT 2DUP TYPE [CHAR] " EMIT
@@ -71,7 +71,7 @@ t{  S" +"    >FLOAT  ->   FALSE     }t
 t{  S" -"    >FLOAT  ->   FALSE     }t
 t{  S"  9"   >FLOAT  ->   FALSE     }t    \ Leading space
 t{  S" 9 "   >FLOAT  ->   FALSE     }t    \ Trailing space
-t{  S" "     >FLOAT  ->   0E TRUE   rx}t 
+t{  S" "     >FLOAT  ->   0E TRUE   rx}t
 t{  S"    "  >FLOAT  ->   0E TRUE   rx}t
 t{  S" 1+1"  >FLOAT  ->   10E TRUE  rx}t
 t{  S" 1-1"  >FLOAT  ->   0.1E TRUE rx}t
@@ -89,7 +89,7 @@ t{  S" -35.0E2"   >FLOAT  ->  -3500E TRUE  rx}t
 t{  S" -35.0E+2"  >FLOAT  ->  -3500E TRUE  rx}t
 t{  S" -35.0E+02" >FLOAT  ->  -3500E TRUE  rx}t
 t{  S" 35.E+2"    >FLOAT  ->   3500E TRUE  rx}t
-t{  S" +35.E+2"   >FLOAT  ->   3500E TRUE  rx}t   
+t{  S" +35.E+2"   >FLOAT  ->   3500E TRUE  rx}t
 t{  S" -35.+2"    >FLOAT  ->  -3500E TRUE  rx}t
 t{  S" +35.+2"    >FLOAT  ->   3500E TRUE  rx}t
 t{  S" -.35+4"    >FLOAT  ->  -3500E TRUE  rx}t
@@ -102,7 +102,7 @@ t{  S" -350000-2" >FLOAT  ->  -3500E TRUE  rx}t
 t{  S" 350000E-2" >FLOAT  ->   3500E TRUE  rx}t
 
 ?.cr ?.errors ?.cr
- 
+
 [THEN]
 
 CR .( End of to-float-test.4th) CR

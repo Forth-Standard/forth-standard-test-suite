@@ -46,7 +46,7 @@ error.
 
 \ FABS should be superfluous in these:
 
-0e fabs       fconstant +0 
+0e fabs       fconstant +0
 +0 fnegate    fconstant -0
 1e 0e f/ fabs fconstant +inf
 +inf fnegate  fconstant -inf
@@ -68,7 +68,7 @@ t{ -0 -0  +0 f~ -> true }t
 t{  7e -2e  +0 f~ -> false }t
 t{ -2e  7e  +0 f~ -> false }t
 t{  7e  7e  +0 f~ -> true }t
-   
+
 t{  7e +inf  +0 f~ -> false }t
 t{ +inf 7e   +0 f~ -> false }t
 t{  7e -inf  +0 f~ -> false }t

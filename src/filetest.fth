@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ The tests are based on John Hayes test program for the core word set
@@ -16,8 +16,8 @@
 
 \ Words tested in this file are:
 \     ( BIN CLOSE-FILE CREATE-FILE DELETE-FILE FILE-POSITION FILE-SIZE
-\     OPEN-FILE R/O R/W READ-FILE READ-LINE REPOSITION-FILE RESIZE-FILE 
-\     S" S\" SOURCE-ID W/O WRITE-FILE WRITE-LINE 
+\     OPEN-FILE R/O R/W READ-FILE READ-LINE REPOSITION-FILE RESIZE-FILE
+\     S" S\" SOURCE-ID W/O WRITE-FILE WRITE-LINE
 \     FILE-STATUS FLUSH-FILE RENAME-FILE SAVE-INPUT RESTORE-INPUT
 \     REFILL
 
@@ -31,7 +31,7 @@
 \     - the Core word set is available and tested
 \     - These tests create files in the current directory, if all goes
 \       well these will be deleted. If something fails they may not be
-\       deleted. If this is a problem ensure you set a suitable 
+\       deleted. If this is a problem ensure you set a suitable
 \       directory before running this test. There is no ANS standard
 \       way of doing this. Also be aware of the file names used below
 \       which are:  fatest1.txt, fatest2.txt and fatest3.txt
@@ -60,7 +60,7 @@ T{ LINE1 FID1 @ WRITE-LINE -> 0 }T
 T{ FID1 @ CLOSE-FILE -> 0 }T
 
 \ ------------------------------------------------------------------------------
-TESTING R/O FILE-POSITION (simple)  READ-LINE 
+TESTING R/O FILE-POSITION (simple)  READ-LINE
 
 200 CONSTANT BSIZE
 CREATE BUF BSIZE ALLOT
@@ -223,7 +223,7 @@ T{ 0
   REQUIRE required-helper2.fth
   S" required-helper2.fth" INCLUDED
   -> 2 }T
-  
+
 \ ------------------------------------------------------------------------------
 TESTING S\" (Forth 2012 interpretation mode)
 
@@ -277,7 +277,7 @@ TESTING nested SAVE-INPUT, RESTORE-INPUT and REFILL from a file
 
 0 SI_INC !
 
-CREATE 2RES -1 , -1 ,   \ Don't use 2VARIABLE from Double number word set 
+CREATE 2RES -1 , -1 ,   \ Don't use 2VARIABLE from Double number word set
 
 : SI2
    READ_A_LINE

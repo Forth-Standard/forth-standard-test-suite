@@ -1,11 +1,11 @@
 \ fpio-test.fs
 \
-\ Evaluate the floating point input/output number conversion of a 
+\ Evaluate the floating point input/output number conversion of a
 \ Forth system which uses IEEE floating point format.
 \
 \ Copyright (c) 2010, Krishna Myneni
 \
-\ Permission is granted to use this code for any purpose, 
+\ Permission is granted to use this code for any purpose,
 \ provided the copyright notice above is preserved.
 \
 \ Revisions:
@@ -19,11 +19,11 @@
 \ Notes:
 \   0. The "tests" performed by this module are intended to assess
 \      the behavior of fp number conversion for a Forth system.
-\      Failure of certain tests by a given Forth system does NOT 
+\      Failure of certain tests by a given Forth system does NOT
 \      imply that the system does not conform to any present Forth
-\      standard, e.g. Forth-94. 
+\      standard, e.g. Forth-94.
 
-\   1. Tests are valid only for systems which use IEEE floating point 
+\   1. Tests are valid only for systems which use IEEE floating point
 \      formats to represent fp numbers. "Round to nearest" mode
 \      is assumed (IEEE 754 "nearest ties to even" rounding mode).
 \
@@ -32,7 +32,7 @@
 \      excluding the exponent field, in order to run all of these
 \      tests.
 \
-\   3. Currently, only tests for floating point number input 
+\   3. Currently, only tests for floating point number input
 \      at single and and double precision are performed; need
 \      to add extended precision tests for those systems which
 \      support the 10 byte format. Also need to test >FLOAT
@@ -68,7 +68,7 @@ HEX
 
 1 FLOATS constant SYSTEM_PREC
 
-\ The following definitions are taken from the reference implementation 
+\ The following definitions are taken from the reference implementation
 \ of the memory access words Rfd (v. 20100621), for Forth 200x.
 
 : B!    ( x addr --    ) SWAP FF AND SWAP C! ;
@@ -92,7 +92,7 @@ PAD B@ 34 = [IF]
 : L@   ( a -- u ) BE-L@ ;
 : lDF@ ( a -- u ) 4 BYTES + L@ ;
 : uDF@ ( a -- u ) L@ ;
-[THEN] 
+[THEN]
 
 : 2L@ dup uDF@ swap lDF@ ;
 
@@ -108,7 +108,7 @@ create r8   8 bytes allot
 cr
 TESTING Conversion of Exactly Representable Numbers
 dec_t{  0.000000000000000000000000e0 !r -> }t
-hex_t{  r4 L@  ->  00000000 }t 
+hex_t{  r4 L@  ->  00000000 }t
 hex_t{  r8 2L@ ->  00000000 00000000 }t
 
 dec_t{  9.99999935045640392457461415399766451285519391957298315801212e-39 !r -> }t

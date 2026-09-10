@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.13 31 October 2015 More tests on [ELSE] and [THEN]
@@ -33,11 +33,11 @@
 \     AHEAD [IF] [ELSE] [THEN] CS-PICK CS-ROLL [DEFINED] [UNDEFINED]
 \     N>R NR> SYNONYM TRAVERSE-WORDLIST NAME>COMPILE NAME>INTERPRET
 \     NAME>STRING
-\     
+\
 
 \ Words not tested:
 \     .S ? DUMP SEE WORDS
-\     ;CODE ASSEMBLER BYE CODE EDITOR FORGET STATE 
+\     ;CODE ASSEMBLER BYE CODE EDITOR FORGET STATE
 \ ------------------------------------------------------------------------------
 \ Assumptions, dependencies and notes:
 \     - tester.fr (or ttester.fs), errorreport.fth and utilities.fth have been
@@ -181,7 +181,7 @@ T{  0  0  0 PT7 -> 0    0    4444 5555 6666 }T
 T{ : PT8
       >R
       AHEAD 111
-      BEGIN 222 
+      BEGIN 222
          [1CS-ROLL]
          THEN
          333
@@ -350,7 +350,7 @@ T{ : SYN3 SYN2 LITERAL ; SYN3 -> 2345 }T
 \? TIF DUP SWAP DROP
 \? TIF >R R> R@ ." ; EXIT ['] [CHAR] RECURSE ABORT" DOES> LITERAL POSTPONE
 \? TIF DO I J LOOP +LOOP UNLOOP LEAVE IF ELSE THEN BEGIN WHILE REPEAT UNTIL
-\? TIF? 
+\? TIF?
 
 \ Test NAME>COMPILE
 \? : N>C  ( caddr u -- )  TRAV-WL GET-NAME-TOKEN NAME>COMPILE EXECUTE ; IMMEDIATE
@@ -366,7 +366,7 @@ T{ : SYN3 SYN2 LITERAL ; SYN3 -> 2345 }T
 \? : (GET-ALL)  ( caddr u nt -- [n] caddr u true )
 \?    DUP >R NAME? IF R@ NAME>INTERPRET EXECUTE ROT ROT THEN
 \?    R> DROP TRUE
-\? ; 
+\? ;
 
 \? : GET-ALL  ( caddr u -- i*x )
 \?    ['] (GET-ALL) TRAV-WL TRAVERSE-WORDLIST 2DROP

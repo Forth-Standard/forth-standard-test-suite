@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.13 13 Nov 2015 Priority of locals tests made conditional on the
@@ -20,7 +20,7 @@
 \ and requires those files to have been loaded
 
 \ Words tested in this file are:
-\     {: TO (LOCAL) 
+\     {: TO (LOCAL)
 
 \ Words not tested:
 \     LOCALS|  (designated obsolescent in Forth 2012)
@@ -131,7 +131,7 @@ T{ : END-LOCALS 99 0 (LOCAL) ; IMMEDIATE     -> }T
 
 \ Simple test
 : LT36 68 ;
-T{ : LT37 {: LT36 :} LT36 ; 69 LT37 LT36 -> 69 68 }T 
+T{ : LT37 {: LT36 :} LT36 ; 69 LT37 LT36 -> 69 68 }T
 
 \? WORDLIST CONSTANT LTWL1
 \? WORDLIST CONSTANT LTWL2

@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 \ ------------------------------------------------------------------------------
 \ Version 0.13  Assumptions and dependencies changed
 \         0.12  1 August 2015 test D< acts on MS cells of double word
@@ -235,7 +235,7 @@ T{ MAX-2INT -1. D< -> FALSE }T
 T{ MAX-2INT MIN-2INT D< -> FALSE }T
 T{ MAX-2INT 2DUP -1. D+ D< -> FALSE }T
 T{ MIN-2INT 2DUP  1. D+ D< -> TRUE  }T
-T{ MAX-INTD S>D 2DUP 1. D+ D< -> TRUE }T \ Ensure D< acts on MS cells 
+T{ MAX-INTD S>D 2DUP 1. D+ D< -> TRUE }T \ Ensure D< acts on MS cells
 
 T{ -1. -1. D= -> TRUE  }T
 T{ -1.  0. D= -> FALSE }T

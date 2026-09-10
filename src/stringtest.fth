@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.13 13 Nov 2015 Interpretive use of S" replaced by $" from
@@ -241,7 +241,7 @@ T{ $" abc%mac3%d" SUBBUF 10 SUBSTITUTE ROT ROT 2DROP 0< -> TRUE }T
 \ apply the appropriate tests depending on whether n < 0 or not.
 \ The overlapping SUBSTITUTE tests:
 \     succeed if SUBSTITUTE returns an error i.e. n<0
-\     fail if n is incorrect 
+\     fail if n is incorrect
 \     fail if the result string is at the incorrect addresses
 \     fail if the result string is incorrect
 \ Note that variables are used to avoid complicated stack manipulations

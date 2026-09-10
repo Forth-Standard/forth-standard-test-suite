@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ The tests are based on John Hayes test program for the core word set
@@ -133,7 +133,7 @@ T{ 0 MIN-INT 1+ DUP MIN-INT GD8  -> 1 }T
 \ n2 is the value of I in a DO ... +LOOP
 \ n3 is a test value
 \ If n2=n3 then return n1-n2 else return 1
-: SET-I  ( n1 n2 n3 -- n1-n2 | 1 ) 
+: SET-I  ( n1 n2 n3 -- n1-n2 | 1 )
    OVER = IF - ELSE 2DROP 1 THEN
 ;
 
@@ -218,7 +218,7 @@ TESTING parsing behaviour of S" ." and (
 T{ : GC5 S" A string"2DROP ; GC5 -> }T
 T{ ( A comment)1234 -> 1234 }T
 T{ : PB1 CR ." You should see 2345: "." 2345"( A comment) CR ; PB1 -> }T
- 
+
 \ ------------------------------------------------------------------------------
 TESTING number prefixes # $ % and 'c' character input
 \ Adapted from the Forth 200X Draft 14.5 document
@@ -299,7 +299,7 @@ TESTING ALLOT ( n -- ) where n <= 0
 
 T{ HERE 5 ALLOT -5 ALLOT HERE = -> <TRUE> }T
 T{ HERE 0 ALLOT HERE = -> <TRUE> }T
- 
+
 \ ------------------------------------------------------------------------------
 
 CR .( End of additional Core tests) CR

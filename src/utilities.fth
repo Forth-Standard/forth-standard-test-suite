@@ -78,7 +78,7 @@ T{ [?DEF] ?DEFTEST2 \? : ?DEFTEST1 2 ;    \ Should be redefined
 [?DEF] S=
 \? : S=  ( caddr1 u1 caddr2 u2 -- f )   \ f = TRUE if strings are equal
 \?    ROT OVER = 0= IF DROP 2DROP FALSE EXIT THEN
-\?    DUP 0= IF DROP 2DROP TRUE EXIT THEN 
+\?    DUP 0= IF DROP 2DROP TRUE EXIT THEN
 \?    0 DO
 \?         OVER C@ OVER C@ = 0= IF 2DROP FALSE UNLOOP EXIT THEN
 \?         CHAR+ SWAP CHAR+

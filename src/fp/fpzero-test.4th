@@ -15,12 +15,12 @@
 \    http://www.math.utah.edu/~beebe/software/ieee/#testing-is-necessary
 \
 \ 2. This Forth program makes no assumptions about the internal representation
-\    of floating point numbers, unlike the original C program, which assumes an 
+\    of floating point numbers, unlike the original C program, which assumes an
 \    IEEE format.
-\ 
+\
 \ 3. Several additional tests are included in the Forth version.
 
-\ s" ans-words" included 
+\ s" ans-words" included
 \ s" ttester"   included
 
 CR .( Running fpzero-test.4th)
@@ -35,7 +35,7 @@ variable #errors    0 #errors !
   1 #errors +! error1 ;  ' noname error-xt !
 
 -0E 0E 0E F~ [IF]
-   
+
    cr cr .( ** System does not support floating point signed zero. **)
    cr    .( ** Therefore these tests have been skipped **) cr
 [ELSE]
@@ -48,7 +48,7 @@ SET-EXACT
 
 t{  0E  FNEGATE       ->  -0E     }t
 t{ -0E  FABS          ->   0E     }t
-t{  0E  F0=           ->   TRUE   }t 
+t{  0E  F0=           ->   TRUE   }t
 t{ -0E  F0=           ->   TRUE   }t
 t{ -0E  0E F<         ->   FALSE  }t
 t{  0E -0E F<         ->   FALSE  }t

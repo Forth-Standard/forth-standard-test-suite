@@ -2,7 +2,7 @@
 
 cr .( Running FP Tests) cr
 
-s" [undefined]" pad c! pad char+ pad c@ move 
+s" [undefined]" pad c! pad char+ pad c@ move
 pad find nip 0=
 [if]
    : [undefined]  ( "name" -- flag )
@@ -20,5 +20,5 @@ s" to-float-test.4th"  included
 s" paranoia.4th"       included
 s" ak-fp-test.fth"     included
 
-cr cr 
+cr cr
 .( FP tests finished) cr cr

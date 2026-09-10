@@ -8,7 +8,7 @@
 \ but WITHOUT ANY WARRANTY; without even the implied warranty of
 \ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-\ The tests are not claimed to be comprehensive or correct 
+\ The tests are not claimed to be comprehensive or correct
 
 \ ------------------------------------------------------------------------------
 \ Version 0.11 25 April 2015 Now checks memory region is unchanged following a
@@ -28,7 +28,7 @@
 
 \ Words tested in this file are:
 \     ALLOCATE FREE RESIZE
-\     
+\
 \ ------------------------------------------------------------------------------
 \ Assumptions, dependencies and notes:
 \     - tester.fr (or ttester.fs), errorreport.fth and utilities.fth have been
@@ -91,7 +91,7 @@ TESTING failure of RESIZE and ALLOCATE (unlikely to be enough memory)
 VARIABLE RESIZE-OK
 T{ ADDR1 @ -1 CHARS RESIZE 0= DUP RESIZE-OK ! -> ADDR1 @ FALSE }T
 
-\ Check unRESIZEd allocation is unchanged following RESIZE failure 
+\ Check unRESIZEd allocation is unchanged following RESIZE failure
 : MEM?  RESIZE-OK @ 0= IF ADDR1 @ 28 CHECKMEM THEN ;   \ Avoid using [IF]
 MEM?
 

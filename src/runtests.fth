@@ -2,7 +2,7 @@
 
 \ Adjust the file paths as appropriate to your system
 \ Select the appropriate test harness, either the simple tester.fr
-\ or the more complex ttester.fs 
+\ or the more complex ttester.fs
 
 CR .( Running ANS Forth and Forth 2012 test programs, version 0.13.4) CR
 

@@ -6,14 +6,14 @@ Version 0.13.6
 coreexttest.fth
    - case sensitivity issue fixed
 doubletest.fth
-   - Fixed overflow bug in M*/ test 
+   - Fixed overflow bug in M*/ test
 filetest.fth
    - Removed dependency on D= and 2VARIABLE in the Double Number word set
    - Replaced double numbers e.g. 500. with 500 0
-   - Deleted Version History it duplicate information in this file 
+   - Deleted Version History it duplicate information in this file
 stringtest.fth
    - Rewrite of SUBSTITUTE tests with overlapping buffers
-   
+
 Version 0.13.5
 ~~~~~~~~~~~~~~
 Ignore - faulty release
@@ -48,7 +48,7 @@ coreplustest.fth
    - additional +LOOP tests about setting I to arbitrary values
 
 errorreport.fth
-   - TOTAL-ERRORS now includes Core word errors (bug fix)  
+   - TOTAL-ERRORS now includes Core word errors (bug fix)
 
 Version 0.13.2
 ~~~~~~~~~~~~~~
@@ -72,7 +72,7 @@ blocktest.fth
 core.fth
    - corrected ACCEPT buffer block length to decimal 80 characters
 
-coreplustest.fth 
+coreplustest.fth
    - moved double number with prefixes to doubletest.fth
    - now tests maximum length definition names and all graphical characters accepted
    - parses upper case characters using 'X' notation
@@ -120,7 +120,7 @@ filetest.fth
    - S" in interpretation mode tested.
    - Added tests of SAVE-INPUT RESTORE-INPUT REFILL in a file, (moved from
      coreexttest.fth).
-   - Calls to COMPARE replaced with STR= (in utilities.fth) 
+   - Calls to COMPARE replaced with STR= (in utilities.fth)
 
 localstest.fth
    - Priority of locals tests made conditional on the required search-order
@@ -131,7 +131,7 @@ runtests.fth
 
 searchordertest.fth
    - Interpretive use of S" replaced by $" from utilities.fth
-   - Replaced two instances of ?DO with DO (as ?DO is in the Core Ext word set) 
+   - Replaced two instances of ?DO with DO (as ?DO is in the Core Ext word set)
 
 stringtest.fth
    - Interpretive use of S" replaced by $" from utilities.fth
@@ -176,7 +176,7 @@ coreexttest.fth
    - BUFFER: tests added
    - Empty CASE statements tested
    - [COMPILE] tests removed as it is obsolescent in Forth 2012
-   
+
 doubletest.fth
    - 2VALUE tests added
 
@@ -215,7 +215,7 @@ coreexttest.fth
    - Added tests contributed by James Bowman for:
      <> U> 0<> 0> NIP TUCK ROLL PICK 2>R 2R@ 2R>
      HEX WITHIN UNUSED AGAIN MARKER
-   - Added tests for: .R U.R ERASE PAD REFILL SOURCE-ID 
+   - Added tests for: .R U.R ERASE PAD REFILL SOURCE-ID
    - Removed ABORT from NeverExecuted to enable systems to continue after
      failure of RESTORE-INPUT.
    - Removed max-intx which is no longer used.
