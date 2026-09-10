@@ -424,6 +424,7 @@ T{ 444 TO VAL1 -> }T
 T{ VD1 -> 444 }T
 T{ 123 VALUE VAL3 IMMEDIATE VAL3 -> 123 }T
 T{ : VD3 VAL3 LITERAL ; VD3 -> 123 }T
+T{ : TO-VAL3 TO VAL3 ; 124 TO-VAL3 VAL3 VD3 -> 124 123 }T
 
 \ -----------------------------------------------------------------------------
 TESTING CASE OF ENDOF ENDCASE
